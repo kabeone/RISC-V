@@ -1,0 +1,4 @@
+target/
+verilog_files/
+project/
+*.xml
