@@ -2,24 +2,17 @@ import chisel3._
 
 class LOGIC_GATES extends Module {
   val io = IO(new Bundle {
-    val switch_a = Input(Bool())
-    val switch_b = Input(Bool())
-    val not = Output(Bool())
-    val and = Output(Bool())
-    val or = Output(Bool())
-    val xor = Output(Bool())
-    val nand = Output(Bool())
-    val nor = Output(Bool())
-    val nxor = Output(Bool())
+    val input = Input(Vec(2, Bool()))
+    val output = Output(Vec(7, Bool()))
   })
 
-  io.not := ~io.switch_a
-  io.and := io.switch_a & io.switch_a
-  io.or := io.switch_a | io.switch_a
-  io.xor := io.switch_a ^ io.switch_a
-  io.nand := ~(io.switch_a & io.switch_b)
-  io.nor := ~(io.switch_a | io.switch_a)
-  io.nxor := ~(io.switch_a ^ io.switch_a)
+  io.output(0) := ~io.input(0)
+  io.output(1) := io.input(0) & io.input(1)
+  io.output(2) := io.input(0) | io.input(1)
+  io.output(3) := io.input(0) ^ io.input(1)
+  io.output(4) := ~(io.input(0) & io.input(1))
+  io.output(5) := ~(io.input(0) | io.input(1))
+  io.output(6) := ~(io.input(0) ^ io.input(1))
 }
 
 object LOGIC_GATES extends App {
